@@ -2,12 +2,13 @@ package com.thinkful.zcarter.objectexplorer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Button;
 import android.view.View;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -56,16 +57,8 @@ class Referee implements Observer {
     }
 }
 
-class Baseball extends Ball {
-    float speed;
-    String direction;
-
-    // A no-argument constructor
-    Baseball(){}
-
-    public void throw(float speed, String direction) {
-        Screen.log("This ball is thrown at " + speed + " miles per hour in a direction: " + direction);
-    }
+abstract class Baseball extends Ball {
+    public abstract void pitch();
 }
 
 class Softball extends Baseball {
@@ -84,13 +77,13 @@ class Softball extends Baseball {
 
 class Hardball extends Baseball {
 
-    public Hardball(int speed) {
-        this.speed = speed;
+    public Hardball() {
+
     }
 
     @Override
     public void pitch() {
-        Screen.log("A hard ball is pitched overhand with speed" + this.speed);
+        Screen.log("A hard ball is pitched overhand");
         this.setChanged();
         this.notifyObservers();
     }
@@ -102,34 +95,6 @@ class Hardball extends Baseball {
         this.notifyObservers();
     }
 }
-class BouncyBall {
-    public void bounce(){
-        Screen.log("The BouncyBall object bounces.");
-    }
-}
-class SuperBall extends BouncyBall {
-
-    @Override
-    public void bounce(){
-        Screen.log("The SuperBall object bounces super high.");
-    }
-}
-
-class Curveball extends Baseball {
-    int curveAmount;
-
-    Curveball(int curveAmount){
-        super();
-        this.curveAmount = curveAmount;
-    }
-
-    @Override
-    public void throw(float speed, String direction){
-        super.throw(speed, direction);
-        Screen.log("... and it has a curve of " + curveAmount);
-    }
-}
-
 
 //-------------------------------------------------------------------
 // This space is for students to define classes in Thinkful Unit 2
@@ -156,23 +121,60 @@ public class MainActivity extends Activity {
             }
         });
         this.playBall();
+
+        Button myButton = (Button)this.findViewById(R.id.myButton); // Use your unique id here
+
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Screen.log("My Button was clicked");
+            }
+        });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(getApplicationContext(), "Calling onStart()...", Toast. LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(getApplicationContext(), "Calling onRestart()...", Toast. LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(getApplicationContext(), "Calling onResume()...", Toast. LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "Calling onPause()...", Toast. LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(getApplicationContext(), "Calling onStop()...", Toast. LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getApplicationContext(), "Calling onDestory()...", Toast. LENGTH_SHORT).show();
+    }
+
 
     public void playBall() {
         // Students experiment with their classes here by instantiating their objects
         // and calling methods on those objects
         // example using the Football class:
         //Football football = new Football();
-        int speed = 10;
-        Hardball hardball = new Hardball(speed);
-        hardball.pitch();
 
-        // Paste the following 2 lines into the playBall() method in MainActivity.java, in the Object Explorer Android project:
-        SuperBall superBall = new SuperBall();
-        superBall.bounce();
-
-        Curveball x = new Curveball(3);
-        x.throw();
     }
 
     @Override

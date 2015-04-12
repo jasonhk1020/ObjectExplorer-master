@@ -14,6 +14,26 @@
         android:layout_marginTop="105dp"
         android:id="@+id/linearLayout">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/myButton"
+            android:layout_gravity="center_horizontal" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test"
+                android:id="@+id/textView" />
+        </ScrollView>
+
     </LinearLayout>
 
     <Button
@@ -23,19 +43,5 @@
         android:id="@+id/startButton"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/linearLayout" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="483dp"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/startButton"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test"
-            android:id="@+id/textView" />
-    </ScrollView>
 
 </RelativeLayout>
